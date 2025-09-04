@@ -2,14 +2,14 @@ package entities;
 
 public class ProdutoNaoPerecivel extends Produto {
 
-	private Integer garantia;
+	private int garantia;
 
-	public ProdutoNaoPerecivel(Integer id, String nome, Double preco, Integer garantia) {
+	public ProdutoNaoPerecivel(int id, String nome, double preco, int garantia) {
 		super(id, nome, preco);
 		this.garantia = garantia;
 	}
 
-	public Integer getGarantia() {
+	public int getGarantia() {
 		return garantia;
 	}
 

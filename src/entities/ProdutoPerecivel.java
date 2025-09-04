@@ -6,7 +6,7 @@ public class ProdutoPerecivel extends Produto {
 
 	private LocalDate dataValidade;
 
-	public ProdutoPerecivel(Integer id, String nome, Double preco, LocalDate dataValidade) {
+	public ProdutoPerecivel(int id, String nome, double preco, LocalDate dataValidade) {
 		super(id, nome, preco);
 		this.dataValidade = dataValidade;
 	}

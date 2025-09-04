@@ -1,25 +1,25 @@
 package application;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import entities.Cliente;
 import entities.Produto;
 import entities.ProdutoNaoPerecivel;
 import entities.ProdutoPerecivel;
+import entities.Venda;
 
 public class Main {
 
-	static List<Produto> produtos = new ArrayList<>();
-	static List<Cliente> clientes = new ArrayList<>();
+	private static List<Produto> produtos = new ArrayList<>();
+	private static List<Cliente> clientes = new ArrayList<>();
+	private static List<Venda> vendas = new ArrayList<>();
 
 	private static int proximoIdProduto = 1;
 	private static int proximoIdCliente = 1;
+	private static int proximoIdVenda = 1;
 
 	private static Scanner scanner = new Scanner(System.in);
 
@@ -46,6 +46,9 @@ public class Main {
 				case 4:
 					listarCliente();
 					break;
+				case 5:
+					registrarVenda();
+					break;
 				case 10:
 					System.out.println("Encerrando o sistema ...");
 					break;
@@ -65,7 +68,6 @@ public class Main {
 
 		}
 		scanner.close();
-
 	}
 
 	public static void exibirMenu() {
@@ -74,6 +76,7 @@ public class Main {
 		System.out.println("2. Listar Produtos");
 		System.out.println("3. Cadastrar Clientes");
 		System.out.println("4. Listar Clientes");
+		System.out.println("5. Registrar Venda");
 		System.out.println("10. Sair");
 		System.out.print("Escolha uma opção: ");
 	}
@@ -160,5 +163,75 @@ public class Main {
 		for (Cliente c : clientes) {
 			c.exibirDetalhes();
 		}
+	}
+
+	public static void registrarVenda() {
+		try {	
+			System.out.println("\n--- Registrar Venda ---");
+			if (produtos.isEmpty() || clientes.isEmpty()) {
+				System.out.println("É necessário ter ao menos um cliente e um produto cadastrado para registrar venda.");
+				return;
+			}
+			
+			listarCliente();
+			System.out.print("Digite o ID do cliente para a venda: ");
+			int IdCliente = Integer.parseInt(scanner.nextLine());
+			
+			Cliente clienteSelecionado = null;
+			for (Cliente c : clientes) {
+				if (c.getId() == IdCliente) {
+					clienteSelecionado = c;
+					break;
+				}
+			}
+			
+			if (clienteSelecionado == null) {
+				System.out.println("Cliente com o ID informado não encontrado.");
+				return;
+			}
+			
+			List<Produto> carrinhoCompras = new ArrayList<>();
+			int idProduto = -1;
+			while (idProduto != 0) {
+				listarProduto();
+				System.out.print("Digite o ID do produto para adicionar ao carrinho (ou 0 para finalizar): ");
+				idProduto = Integer.parseInt(scanner.nextLine());
+				
+				if (idProduto != 0) {
+					Produto produtoSelecionado = null;
+					for (Produto p : produtos) {
+						if (p.getId() == idProduto) {
+							produtoSelecionado = p;
+						}
+					}
+					if (produtoSelecionado != null) {
+						carrinhoCompras.add(produtoSelecionado);
+						System.out.println("'" + produtoSelecionado.getNome() + "' adicionado ao carrinho.");
+					} else {
+						System.out.println("Produto não encontrado.");
+					}
+				}	
+			}
+			
+			if (carrinhoCompras.isEmpty()) {
+				System.out.println("Nenhum produto selecionado. Venda cancelada.");
+				return;
+			}
+			
+			Venda novaVenda = new Venda(proximoIdVenda++, clienteSelecionado, carrinhoCompras);
+			vendas.add(novaVenda);
+			
+			System.out.println("\n==============================");
+			System.out.println("Venda registrada com sucesso!!");
+			System.out.printf("O valor total é %.2f\n", novaVenda.getValorTotal());
+			System.out.println("==============================");
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao registrar venda. Verifique os IDs inseridos. " + e.getMessage());
+		}
+		
+	
+	
+	
 	}
 }
