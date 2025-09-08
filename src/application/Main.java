@@ -49,6 +49,9 @@ public class Main {
 				case 5:
 					registrarVenda();
 					break;
+				case 6:
+					listarVenda();
+					break;
 				case 10:
 					System.out.println("Encerrando o sistema ...");
 					break;
@@ -77,6 +80,7 @@ public class Main {
 		System.out.println("3. Cadastrar Clientes");
 		System.out.println("4. Listar Clientes");
 		System.out.println("5. Registrar Venda");
+		System.out.println("6. Listar Vendas");
 		System.out.println("10. Sair");
 		System.out.print("Escolha uma opção: ");
 	}
@@ -166,17 +170,18 @@ public class Main {
 	}
 
 	public static void registrarVenda() {
-		try {	
+		try {
 			System.out.println("\n--- Registrar Venda ---");
 			if (produtos.isEmpty() || clientes.isEmpty()) {
-				System.out.println("É necessário ter ao menos um cliente e um produto cadastrado para registrar venda.");
+				System.out
+						.println("É necessário ter ao menos um cliente e um produto cadastrado para registrar venda.");
 				return;
 			}
-			
+
 			listarCliente();
 			System.out.print("Digite o ID do cliente para a venda: ");
 			int IdCliente = Integer.parseInt(scanner.nextLine());
-			
+
 			Cliente clienteSelecionado = null;
 			for (Cliente c : clientes) {
 				if (c.getId() == IdCliente) {
@@ -184,19 +189,19 @@ public class Main {
 					break;
 				}
 			}
-			
+
 			if (clienteSelecionado == null) {
 				System.out.println("Cliente com o ID informado não encontrado.");
 				return;
 			}
-			
+
 			List<Produto> carrinhoCompras = new ArrayList<>();
 			int idProduto = -1;
 			while (idProduto != 0) {
 				listarProduto();
 				System.out.print("Digite o ID do produto para adicionar ao carrinho (ou 0 para finalizar): ");
 				idProduto = Integer.parseInt(scanner.nextLine());
-				
+
 				if (idProduto != 0) {
 					Produto produtoSelecionado = null;
 					for (Produto p : produtos) {
@@ -210,28 +215,45 @@ public class Main {
 					} else {
 						System.out.println("Produto não encontrado.");
 					}
-				}	
+				}
 			}
-			
+
 			if (carrinhoCompras.isEmpty()) {
 				System.out.println("Nenhum produto selecionado. Venda cancelada.");
 				return;
 			}
-			
+
 			Venda novaVenda = new Venda(proximoIdVenda++, clienteSelecionado, carrinhoCompras);
 			vendas.add(novaVenda);
-			
+
 			System.out.println("\n==============================");
 			System.out.println("Venda registrada com sucesso!!");
 			System.out.printf("O valor total é %.2f\n", novaVenda.getValorTotal());
 			System.out.println("==============================");
-			
+
 		} catch (Exception e) {
 			System.out.println("Erro ao registrar venda. Verifique os IDs inseridos. " + e.getMessage());
 		}
+
+	}
+
+	public static void listarVenda() {
+		System.out.println("\n--- Histórico de Vendas ---");
+		if (vendas.isEmpty()) {
+			System.out.println("Nenhuma venda foi registrada até o momento.");
+			return;
+		}
 		
-	
-	
-	
+		for (Venda v : vendas) {
+			System.out.println("---------------------");
+			System.out.printf("ID da venda: %d | Data: %s | Cliente: %s (ID: %d) | Status: %s\n",
+					v.getId(), v.getDataVenda(), v.getCliente().getNome(), v.getCliente().getId(), v.getStatus());	
+			for (Produto p : v.getProdutosVendidos()) {
+				System.out.printf("- ID: %d | %s (R$%.2f)\n", p.getId(), p.getNome(), p.getPreco());
+			}
+			System.out.printf("VALOR TOTAL DA VENDA: R$%.2f\n", v.getValorTotal());
+		}
+		System.out.println("---------------------");
+
 	}
 }
