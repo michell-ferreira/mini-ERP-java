@@ -56,6 +56,9 @@ public class Main {
 				case 7:
 					cancelarVenda();
 					break;
+				case 8:
+					ExibirTotalVendasAtivas();
+					break;
 				case 10:
 					System.out.println("Encerrando o sistema ...");
 					break;
@@ -86,6 +89,7 @@ public class Main {
 		System.out.println("5. Registrar Venda");
 		System.out.println("6. Listar Vendas");
 		System.out.println("7. Cancelar Vendas");
+		System.out.println("8. Relatório de Vendas Ativas");
 		System.out.println("10. Sair");
 		System.out.print("Escolha uma opção: ");
 	}
@@ -299,5 +303,24 @@ public class Main {
 			System.out.println("Erro: Digite um ID numérico válido.");
 		}
 		
+	}
+	
+	private static void ExibirTotalVendasAtivas() {
+		System.out.println("\n--- Relatório de Vendas Ativas ---");
+		
+		double totalAtivo = 0.0;
+		int contadorVendasAtivas = 0;
+		
+		for (Venda v: vendas) {
+			if (v.getStatus() == StatusVenda.ATIVO) {
+				totalAtivo += v.getValorTotal();
+				contadorVendasAtivas++;
+			}
+		}
+		
+		System.out.println("==============================");
+		System.out.printf("Quantidade de Vendas Ativas: %d\n", contadorVendasAtivas);
+		System.out.printf("O Valor Total Acumulado: R$%.2f\n", totalAtivo);
+		System.out.println("==============================");
 	}
 }
