@@ -10,6 +10,7 @@ import entities.Produto;
 import entities.ProdutoNaoPerecivel;
 import entities.ProdutoPerecivel;
 import entities.Venda;
+import enums.StatusVenda;
 
 public class Main {
 
@@ -52,6 +53,9 @@ public class Main {
 				case 6:
 					listarVenda();
 					break;
+				case 7:
+					cancelarVenda();
+					break;
 				case 10:
 					System.out.println("Encerrando o sistema ...");
 					break;
@@ -81,6 +85,7 @@ public class Main {
 		System.out.println("4. Listar Clientes");
 		System.out.println("5. Registrar Venda");
 		System.out.println("6. Listar Vendas");
+		System.out.println("7. Cancelar Vendas");
 		System.out.println("10. Sair");
 		System.out.print("Escolha uma opção: ");
 	}
@@ -255,5 +260,44 @@ public class Main {
 		}
 		System.out.println("---------------------");
 
+	}
+	
+	private static void cancelarVenda(){
+		System.out.println("\n--- Cancelamento de Vendas ---");
+		if (vendas.isEmpty()) {
+			System.out.println("Nenhuma venda para cancelar");
+			return;
+		}
+		
+		listarVenda();
+		
+		try {
+			System.out.print("Digite o ID da venda que deseja cancelar: ");
+			int idVenda = Integer.parseInt(scanner.nextLine());
+			
+			Venda vendaSelecionada = null;
+			for (Venda v : vendas) {
+				if (v.getId() == idVenda) {
+					vendaSelecionada = v;
+					break;
+				}
+			}
+			
+			if (vendaSelecionada != null) {
+				if (vendaSelecionada.getStatus() == StatusVenda.CANCELADO) {
+					System.out.println("Esta venda já foi cancelada.");
+				} else {
+					vendaSelecionada.cancelarVenda();
+					System.out.println("Venda ID-" + idVenda + " cancelada com sucesso.");
+				}
+			} else {
+				System.out.println("Venda com o ID-" + idVenda + " não foi encontrada");
+				return;
+			}
+			
+		} catch (NumberFormatException e) {
+			System.out.println("Erro: Digite um ID numérico válido.");
+		}
+		
 	}
 }
