@@ -92,6 +92,6 @@ java application.Main
 **Michell Ferreira**
 
 * **GitHub:** [michell-ferreira](https://github.com/michell-ferreira)
-* **LinkedIn:** (https://www.linkedin.com/in/ferreira-michel/)
+* **LinkedIn:** https://www.linkedin.com/in/ferreira-michel/
 
 ---
