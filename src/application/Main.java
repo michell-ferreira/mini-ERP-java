@@ -127,10 +127,10 @@ public class Main {
 					System.out.println("O produto está fora da validade.");
 					return;
 				}
-				produtos.add(new ProdutoPerecivel(proximoIdProduto, nome, preco, dataValidade));
+				produtos.add(new ProdutoPerecivel(proximoIdProduto++, nome, preco, dataValidade));
 
 			} else if (perecivel.equalsIgnoreCase("n")) {
-				System.out.print("Garantia: ");
+				System.out.print("Garantia em meses: ");
 				int garantia = Integer.parseInt(scanner.nextLine());
 				if (garantia < 0) {
 					System.out.println("Garantia não pode ser menor que 0.");

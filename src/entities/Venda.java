@@ -13,12 +13,12 @@ public class Venda {
 	private LocalDate dataVenda;
 	private double valorTotal;
 	private StatusVenda status;
-	
+
 	public Venda(int id, Cliente cliente, List<Produto> produtosVendidos) {
 		this.id = id;
 		this.cliente = cliente;
 		this.produtosVendidos = produtosVendidos;
-		
+
 		this.dataVenda = LocalDate.now();
 		this.valorTotal = calcularValorTotal();
 		this.status = StatusVenda.ATIVO;
@@ -51,7 +51,7 @@ public class Venda {
 	public void cancelarVenda() {
 		this.status = StatusVenda.CANCELADO;
 	}
-	
+
 	public double calcularValorTotal() {
 		double total = 0.0;
 		for (Produto p : this.produtosVendidos) {
@@ -59,5 +59,5 @@ public class Venda {
 		}
 		return total;
 	}
-	
+
 }
