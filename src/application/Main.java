@@ -57,7 +57,10 @@ public class Main {
 					cancelarVenda();
 					break;
 				case 8:
-					ExibirTotalVendasAtivas();
+					exibirTotalVendasAtivas();
+					break;
+				case 9:
+					editarProduto();
 					break;
 				case 10:
 					System.out.println("Encerrando o sistema ...");
@@ -90,6 +93,7 @@ public class Main {
 		System.out.println("6. Listar Vendas");
 		System.out.println("7. Cancelar Vendas");
 		System.out.println("8. Relatório de Vendas Ativas");
+		System.out.println("9. Editar Produto");
 		System.out.println("10. Sair");
 		System.out.print("Escolha uma opção: ");
 	}
@@ -252,11 +256,11 @@ public class Main {
 			System.out.println("Nenhuma venda foi registrada até o momento.");
 			return;
 		}
-		
+
 		for (Venda v : vendas) {
 			System.out.println("---------------------");
-			System.out.printf("ID da venda: %d | Data: %s | Cliente: %s (ID: %d) | Status: %s\n",
-					v.getId(), v.getDataVenda(), v.getCliente().getNome(), v.getCliente().getId(), v.getStatus());	
+			System.out.printf("ID da venda: %d | Data: %s | Cliente: %s (ID: %d) | Status: %s\n", v.getId(),
+					v.getDataVenda(), v.getCliente().getNome(), v.getCliente().getId(), v.getStatus());
 			for (Produto p : v.getProdutosVendidos()) {
 				System.out.printf("- ID: %d | %s (R$%.2f)\n", p.getId(), p.getNome(), p.getPreco());
 			}
@@ -265,20 +269,20 @@ public class Main {
 		System.out.println("---------------------");
 
 	}
-	
-	private static void cancelarVenda(){
+
+	private static void cancelarVenda() {
 		System.out.println("\n--- Cancelamento de Vendas ---");
 		if (vendas.isEmpty()) {
 			System.out.println("Nenhuma venda para cancelar");
 			return;
 		}
-		
+
 		listarVenda();
-		
+
 		try {
 			System.out.print("Digite o ID da venda que deseja cancelar: ");
 			int idVenda = Integer.parseInt(scanner.nextLine());
-			
+
 			Venda vendaSelecionada = null;
 			for (Venda v : vendas) {
 				if (v.getId() == idVenda) {
@@ -286,7 +290,7 @@ public class Main {
 					break;
 				}
 			}
-			
+
 			if (vendaSelecionada != null) {
 				if (vendaSelecionada.getStatus() == StatusVenda.CANCELADO) {
 					System.out.println("Esta venda já foi cancelada.");
@@ -298,29 +302,99 @@ public class Main {
 				System.out.println("Venda com o ID-" + idVenda + " não foi encontrada");
 				return;
 			}
-			
+
 		} catch (NumberFormatException e) {
 			System.out.println("Erro: Digite um ID numérico válido.");
 		}
-		
+
 	}
-	
-	private static void ExibirTotalVendasAtivas() {
+
+	private static void exibirTotalVendasAtivas() {
 		System.out.println("\n--- Relatório de Vendas Ativas ---");
-		
+
 		double totalAtivo = 0.0;
 		int contadorVendasAtivas = 0;
-		
-		for (Venda v: vendas) {
+
+		for (Venda v : vendas) {
 			if (v.getStatus() == StatusVenda.ATIVO) {
 				totalAtivo += v.getValorTotal();
 				contadorVendasAtivas++;
 			}
 		}
-		
+
 		System.out.println("==============================");
 		System.out.printf("Quantidade de Vendas Ativas: %d\n", contadorVendasAtivas);
 		System.out.printf("O Valor Total Acumulado: R$%.2f\n", totalAtivo);
 		System.out.println("==============================");
+	}
+
+	private static void editarProduto() {
+		System.out.println("\n--- Edição de Produto ---");
+
+		if (produtos.isEmpty()) {
+			System.out.println("Nenhum produto cadastrado para editar.");
+			return;
+		}
+
+		listarProduto();
+
+		try {
+			System.out.print("Digite o ID do produto que deseja modificar: ");
+			int idProduto = Integer.parseInt(scanner.nextLine());
+
+			Produto produtoSelecionado = null;
+			for (Produto p : produtos) {
+				if (p.getId() == idProduto) {
+					produtoSelecionado = p;
+					break;
+				}
+			}
+
+			if (produtoSelecionado == null) {
+				System.out.println("ID informado não é válido.");
+				return;
+			}
+
+			int opcao = 0;
+			while (opcao != 3) {
+				System.out.println("\nProduto selecionado: " + produtoSelecionado.getNome());
+				System.out.println("O que você deseja editar?");
+				System.out.println("1. Nome");
+				System.out.println("2. Preço");
+				System.out.println("3. Sair");
+				System.out.print("Escolha uma opção: ");
+				opcao = Integer.parseInt(scanner.nextLine());
+
+				switch (opcao) {
+				case 1:
+					System.out.print("Digite o novo Nome do Produto: ");
+					String nomeProduto = scanner.nextLine();
+					produtoSelecionado.setNome(nomeProduto);
+					System.out.println(
+							"O Nome do produto de ID." + produtoSelecionado.getId() + " foi modificado com sucesso.");
+					break;
+				case 2:
+					System.out.print("Digite o novo Preço do Produto: ");
+					double novoPreco = Double.parseDouble(scanner.nextLine());
+					
+					if (novoPreco <= 0) {
+						System.out.println("Preço deve ser positivo.");
+						break;
+					}
+					
+					produtoSelecionado.setPreco(novoPreco);
+					System.out.println(
+							"O Preço do produto de ID." + produtoSelecionado.getId() + " foi modificado com sucesso");
+					break;
+				case 3:
+					System.out.println("Voltando ao menu principal...");
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Erro durante a edição. Verifique os dados inseridos.");
+		}
 	}
 }
