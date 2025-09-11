@@ -18,7 +18,7 @@ Projeto de um sistema de console simulando um Mini ERP (Enterprise Resource Plan
 
 ## 📜 Sobre o Projeto
 
-Este projeto foi concebido como um desafio prático para solidificar os pilares da POO. A aplicação simula um ambiente de gestão comercial, permitindo o cadastro de produtos (perecíveis e não-perecíveis), o cadastro de clientes e o registro de vendas, culminando na implementação completa do ciclo CRUD (Create, Read, Update, Delete) e de lógicas de negócio como relatórios e anulação de registros.
+Este projeto foi concebido como um desafio prático para solidificar os pilares da POO. A aplicação simula um ambiente de gestão comercial, permitindo o cadastro de produtos (perecíveis e não-perecíveis), o cadastro de clientes e o registro de vendas, culminando na implementação completa do ciclo CRUD (Create, Read, Update, Update (Soft Delete)) e de lógicas de negócio como relatórios e anulação de registros.
 
 O foco principal foi a criação de um código limpo, bem estruturado em pacotes, e a aplicação correta de padrões de design para garantir um sistema robusto e de fácil manutenção.
 
@@ -92,6 +92,6 @@ java application.Main
 **Michell Ferreira**
 
 * **GitHub:** [michell-ferreira](https://github.com/michell-ferreira)
-* **LinkedIn:** https://www.linkedin.com/in/ferreira-michel/
+* **LinkedIn:** [ferreira-michel](https://www.linkedin.com/in/ferreira-michel/)
 
 ---
