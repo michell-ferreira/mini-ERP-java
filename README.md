@@ -73,7 +73,7 @@ Este projeto foi desenvolvido para ser compilado e executado via linha de comand
 
 ```bash
 # 1. Clone o repositório
-git clone [https://github.com/michell-ferreira/mini-ERP-java](https://github.com/michell-ferreira/mini-ERP-java)
+git clone https://github.com/michell-ferreira/mini-ERP-java
 
 # 2. Navegue até a pasta src
 cd mini-ERP-java/src
