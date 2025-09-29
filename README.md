@@ -10,8 +10,6 @@ Projeto de um sistema de console simulando um Mini ERP (Enterprise Resource Plan
 
 ## 🎥 Demonstração em Vídeo
 
-**(Assim que gravar, edite esta linha e o link abaixo)**
-
 <a href="https://www.youtube.com/watch?v=U060vLgPmsg" target="_blank">Assista a uma rápida demonstração do sistema em funcionamento</a>
 
 ---
