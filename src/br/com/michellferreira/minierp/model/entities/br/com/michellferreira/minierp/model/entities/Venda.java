@@ -1,9 +1,9 @@
-package entities;
+package br.com.michellferreira.minierp.model.entities;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import enums.StatusVenda;
+import br.com.michellferreira.minierp.model.enums.StatusVenda;
 
 public class Venda {
 

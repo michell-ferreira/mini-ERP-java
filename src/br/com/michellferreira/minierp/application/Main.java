@@ -1,4 +1,4 @@
-package application;
+package br.com.michellferreira.minierp.application;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -63,14 +63,14 @@ public class Main {
 					editarProduto();
 					break;
 				case 10:
-					System.out.println("Encerrando o sistema ...");
+					System.out.println("Encerrando o sistema...");
 					break;
 				default:
-					System.out.println("Opção inválida. Tente novamente");
+					System.out.println("Opção inválida. Tente novamente.");
 				}
 
 			} catch (NumberFormatException e) {
-				System.out.println("Por favor, digite uma opção válida");
+				System.out.println("Por favor, digite uma opção válida.");
 				opcao = 0;
 
 			}

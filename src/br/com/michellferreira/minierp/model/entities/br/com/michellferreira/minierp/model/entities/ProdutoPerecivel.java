@@ -1,4 +1,4 @@
-package entities;
+package br.com.michellferreira.minierp.model.entities;
 
 import java.time.LocalDate;
 

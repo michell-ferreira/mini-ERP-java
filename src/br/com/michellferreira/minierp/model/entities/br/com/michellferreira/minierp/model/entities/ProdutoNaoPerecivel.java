@@ -1,4 +1,4 @@
-package entities;
+package br.com.michellferreira.minierp.model.entities;
 
 public class ProdutoNaoPerecivel extends Produto {
 
