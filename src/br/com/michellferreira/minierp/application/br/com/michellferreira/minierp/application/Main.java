@@ -1,28 +1,25 @@
 package br.com.michellferreira.minierp.application;
 
+import br.com.michellferreira.minierp.model.entities.*;
+import br.com.michellferreira.minierp.model.enums.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import entities.Cliente;
-import entities.Produto;
-import entities.ProdutoNaoPerecivel;
-import entities.ProdutoPerecivel;
-import entities.Venda;
-import enums.StatusVenda;
 
 public class Main {
 
-	private static List<Produto> produtos = new ArrayList<>();
-	private static List<Cliente> clientes = new ArrayList<>();
-	private static List<Venda> vendas = new ArrayList<>();
+	private static final List<Produto> produtos = new ArrayList<>();
+	private static final List<Cliente> clientes = new ArrayList<>();
+	private static final List<Venda> vendas = new ArrayList<>();
 
 	private static int proximoIdProduto = 1;
 	private static int proximoIdCliente = 1;
 	private static int proximoIdVenda = 1;
 
-	private static Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
