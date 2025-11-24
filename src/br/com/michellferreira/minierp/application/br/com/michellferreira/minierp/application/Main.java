@@ -32,38 +32,17 @@ public class Main {
 				opcao = Integer.parseInt(scanner.nextLine());
 
 				switch (opcao) {
-				case 1:
-					cadastrarProduto();
-					break;
-				case 2:
-					listarProduto();
-					break;
-				case 3:
-					cadastrarCliente();
-					break;
-				case 4:
-					listarCliente();
-					break;
-				case 5:
-					registrarVenda();
-					break;
-				case 6:
-					listarVenda();
-					break;
-				case 7:
-					cancelarVenda();
-					break;
-				case 8:
-					exibirTotalVendasAtivas();
-					break;
-				case 9:
-					editarProduto();
-					break;
-				case 10:
-					System.out.println("Encerrando o sistema...");
-					break;
-				default:
-					System.out.println("Opção inválida. Tente novamente.");
+				case 1 -> cadastrarProduto();
+				case 2 -> listarProduto();
+				case 3 -> cadastrarCliente();
+				case 4 -> listarCliente();
+				case 5 -> registrarVenda();
+				case 6 -> listarVenda();
+				case 7 -> cancelarVenda();
+				case 8 -> exibirTotalVendasAtivas();
+				case 9 -> editarProduto();
+				case 10 -> System.out.println("Encerrando o sistema...");
+                default -> System.out.println("Opção inválida. Tente novamente.");
 				}
 
 			} catch (NumberFormatException e) {
